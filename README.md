@@ -15,6 +15,8 @@ Once you have generated the file, you can include it in your program. It is impo
 Example:
 <https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/sine_model_data.cc>
 
+<https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc>
+
 ```
 git clone --depth 1 https://github.com/tensorflow/tensorflow.git
 cd tensorflow
