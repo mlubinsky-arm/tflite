@@ -13,6 +13,9 @@ xxd -i converted_model.tflite > model_data.cc
 Once you have generated the file, you can include it in your program. It is important to change the array declaration to const for better memory efficiency on embedded platforms.
 
 Example:
+C++ 11
+<https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world>
+
 <https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/sine_model_data.cc>
 
 <https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc>
