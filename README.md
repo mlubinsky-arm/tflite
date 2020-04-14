@@ -17,6 +17,8 @@ Example:
 
 <https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc>
 
+<https://stackoverflow.com/questions/60764852/deploying-tflite-on-microcontrollers>
+
 ```
 git clone --depth 1 https://github.com/tensorflow/tensorflow.git
 cd tensorflow
