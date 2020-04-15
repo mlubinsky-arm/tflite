@@ -22,6 +22,13 @@ for filename in glob.glob("mbed-os/tools/profiles/*.json"):
   for line in fileinput.input(filename, inplace=True):
     print line.replace("\"-std=gnu++98\"","\"-std=c++11\", \"-fpermissive\"")'
 ```
+
+```
+/Users/miclub01/GIT/tensorflow/tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj
+(mbed) (base) [prj](master)$ ls ./hello_world/mbed/tensorflow/lite/micro/examples/hello_world/
+constants.h        main.cc            main_functions.h   sine_model_data.cc
+disco_f746ng       main_functions.cc  output_handler.h   sine_model_data.h
+```
 ### Example:
 <https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world>
 
@@ -37,9 +44,20 @@ cd tensorflow
 ```
 use Make version >= 4.2.1
 ```
-make -f tensorflow/lite/experimental/micro/tools/make/Makefile TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
+gmake -f tensorflow/lite/experimental/micro/tools/make/Makefile TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
 ```
 You should see the expected mbed folder here:
 ```
 tensorflow/lite/experimental/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed/
+```
+pwd
+```
+/Users/miclub01/GIT/tensorflow/tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed
+```
+ls
+```
+ls
+BSP_DISCO_F746NG     LCD_DISCO_F746NG     README_MBED.md       mbed-os.lib          run.sh
+BSP_DISCO_F746NG.lib LCD_DISCO_F746NG.lib __pycache__          mbed_app.json        tensorflow
+BUILD                LICENSE              mbed-os              mbed_settings.py     third_party
 ```
