@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 #include "mcc_common_button_and_led.h"
 #include "blinky.h"
 /*** MICHAEL  ***/
-#include "models/model.h"
+// #include "models/model.h"
 #ifndef MBED_CONF_MBED_CLOUD_CLIENT_DISABLE_CERTIFICATE_ENROLLMENT
 #include "certificate_enrollment_user_cb.h"
 #endif
