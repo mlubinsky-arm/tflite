@@ -44,8 +44,8 @@ cd tensorflow
 ```
 use Make version >= 4.2.1
 ```
-gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
-gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed  generate_hello_world_mbed_project
+# gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
+  gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed TAGS="cmsis-nn" generate_hello_world_mbed_project
 
 cd tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed
 find tensorflow/ | grep main
@@ -59,11 +59,14 @@ BSP_DISCO_F746NG.lib LCD_DISCO_F746NG.lib __pycache__          mbed_app.json    
 BUILD                LICENSE              mbed-os              mbed_settings.py     third_party
 
 
+mbed compile -m NUCLEO_H743ZI2 -t GCC_ARM
 mbed compile -m DISCO_F746NG -t GCC_ARM 
 ```
 
 ## CMSIS
 <https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels/cmsis-nn>
+
 <https://arm-software.github.io/CMSIS_5/General/html/index.html>
+
 <https://github.com/ARM-software/CMSIS_5>
 
