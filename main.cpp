@@ -48,7 +48,6 @@ int main(int argc, char* argv[]) {
 #endif
 
 //   #include "models/models/data.hpp" // uTensor
-#include "XNucleoIKS01A3.h"     // ST Sensor Shield
 #include "treasure-data-rest.h" // Pelion Data Management
 
 #if defined(MBED_CONF_NANOSTACK_HAL_EVENT_LOOP_USE_MBED_EVENTS) && \
@@ -68,12 +67,17 @@ TreasureData_RESTAPI* td = new TreasureData_RESTAPI(net,"michael_aiot_workshop_d
 */
 
 /* Instantiate the expansion board */
+#ifdef NUCLEO
+
+#include "XNucleoIKS01A3.h"     // ST Sensor Shield
 static XNucleoIKS01A3 *mems_expansion_board = XNucleoIKS01A3::instance(D14, D15, D4, D5, A3, D6, A4);
 
 /* Retrieve the composing elements of the expansion board */
 static STTS751Sensor *temp = mems_expansion_board->t_sensor;
 static HTS221Sensor *hum_temp = mems_expansion_board->ht_sensor;
 static LPS22HHSensor *press_temp = mems_expansion_board->pt_sensor;
+
+#endif
 
 // event based LED blinker, controlled via pattern_resource
 #ifndef MCC_MINIMAL
@@ -162,11 +166,15 @@ volatile int temp_index =0;
 void sensors_update() {
 
     temp_index = (temp_index +1)%ARR_SIZE; //wrap index
+    temp_value[temp_index] = 20.0f;
+    float humidity_value=63.0f;
+    float pressure_value=54.4f;
+
+#ifdef NUCLEO
     temp->get_temperature(&temp_value[temp_index]);
-    float humidity_value;
     hum_temp->get_humidity(&humidity_value);
-    float pressure_value;
     press_temp->get_pressure(&pressure_value);
+#endif
 
     // if (endpointInfo) {
         printf("temp[%d]:%6.4f,humidity:%6.4f,pressure:%6.4f\r\n",temp_index, temp_value[temp_index], humidity_value, pressure_value);
@@ -183,27 +191,24 @@ void sensors_update() {
         printf("finished....");
         S_TENSOR prediction = ctx.get({"dense_3_1/BiasAdd:0"});
         float result = *(prediction->read<float>(0,0));
-*/
-        float result = get_model_result(temp_value);
+
+       // float result = get_model_result(temp_value);
         printf("\r\n Predicted temperature is %f\r\n",result);
-        if(abs(result - (float)temp_value[temp_index]) > (result/100)*5 ){
-            printf("\r\n Its getting hot in here.. ");
-        } else{
-            printf("\r\n It is not hot ");
-        }
         x = sprintf(td_buff,"{\"temp\":%f,\"humidity\":%f,\"pressure\":%f,\"temp_predict\":%f}", temp_value[temp_index], humidity_value, pressure_value, result);
         td_buff[x]=0; //null terminate string
-//MICHAEL        td->sendData(td_buff,strlen(td_buff));
+        td->sendData(td_buff,strlen(td_buff));
+*/
 }
 
 
 void main_application(void)
 {
     /* Enable sensors on the shield */
+#ifdef NUCLEO
     hum_temp->enable();
     press_temp->enable();
     temp->enable();
-
+#endif
     // SimpleClient is used for registering and unregistering resources to a server.
     SimpleM2MClient mbedClient;
 
