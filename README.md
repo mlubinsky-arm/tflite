@@ -44,20 +44,20 @@ cd tensorflow
 ```
 use Make version >= 4.2.1
 ```
-gmake -f tensorflow/lite/experimental/micro/tools/make/Makefile TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
-```
-You should see the expected mbed folder here:
-```
-tensorflow/lite/experimental/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed/
-```
-pwd
-```
-/Users/miclub01/GIT/tensorflow/tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed
-```
-ls
-```
+gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed TAGS="CMSIS disco_f746ng" generate_hello_world_mbed_project
+gmake -f tensorflow/lite/micro/tools/make/Makefile  TARGET=mbed  generate_hello_world_mbed_project
+
+cd tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj/hello_world/mbed
+find tensorflow/ | grep main
+tensorflow//lite/micro/examples/hello_world/main.cc
+tensorflow//lite/micro/examples/hello_world/main_functions.h
+tensorflow//lite/micro/examples/hello_world/main_functions.cc
+
 ls
 BSP_DISCO_F746NG     LCD_DISCO_F746NG     README_MBED.md       mbed-os.lib          run.sh
 BSP_DISCO_F746NG.lib LCD_DISCO_F746NG.lib __pycache__          mbed_app.json        tensorflow
 BUILD                LICENSE              mbed-os              mbed_settings.py     third_party
+
+
+mbed compile -m DISCO_F746NG -t GCC_ARM 
 ```
