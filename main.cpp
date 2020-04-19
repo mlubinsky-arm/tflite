@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
 #include "blinky.h"
 /*** MICHAEL  ***/
 // #include "models/model.h"
+
 #ifndef MBED_CONF_MBED_CLOUD_CLIENT_DISABLE_CERTIFICATE_ENROLLMENT
 #include "certificate_enrollment_user_cb.h"
 #endif
@@ -56,6 +57,9 @@ int main(int argc, char* argv[]) {
  (MBED_CONF_EVENTS_SHARED_DISPATCH_FROM_APPLICATION == 1)
 #include "nanostack-event-loop/eventOS_scheduler.h"
 #endif
+
+
+#include "tensorflow/lite/micro/examples/hello_world/main_functions.h"
 
  // Default network interface object. Don't forget to change the WiFi SSID/password in mbed_app.json if you're using WiFi.
 NetworkInterface *net = NetworkInterface::get_default_instance();
@@ -107,6 +111,14 @@ void unregister(void);
 
 // Pointer to mbedClient, used for calling close function.
 static SimpleM2MClient *client;
+
+// TFmicro
+void tfloop() {
+  setup();
+  while (true) {
+    loop();
+  }
+}
 
 void notification_status_callback(const M2MBase& object,
                             const M2MBase::MessageDeliveryStatus status,
@@ -264,7 +276,8 @@ void main_application(void)
     }
     // Check if client is registering or registered, if true sleep and repeat.
     while (mbedClient.is_register_called()) {
-        sensors_update();
+        // sensors_update();
+        tfloop();
         mcc_platform_do_wait(10000);
     }
 
