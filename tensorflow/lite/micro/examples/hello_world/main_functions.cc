@@ -110,6 +110,7 @@ void loop() {
 
   // Output the results. A custom HandleOutput function can be implemented
   // for each supported hardware target.
+  printf("\n x=%f  y=%f", x_val, y_val);
   HandleOutput(error_reporter, x_val, y_val);
 
   // Increment the inference_counter, and reset it if we have reached
