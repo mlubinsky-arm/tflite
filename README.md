@@ -30,6 +30,10 @@ $ ls ./hello_world/mbed/tensorflow/lite/micro/examples/hello_world/
 constants.h        main.cc            main_functions.h   sine_model_data.cc
 disco_f746ng       main_functions.cc  output_handler.h   sine_model_data.h
 
+main_functions.cc:  
+  model = tflite::GetModel(g_sine_model_data);
+  uint8_t tensor_arena[kTensorArenaSize];
+
 $ ls tensorflow/lite/micro/examples/hello_world/disco_f746ng/
 constants.cc      output_handler.cc
 ```
