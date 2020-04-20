@@ -20,14 +20,18 @@ By default, Mbed will build the project using C++98. However, TensorFlow Lite re
 python -c 'import fileinput, glob;
 for filename in glob.glob("mbed-os/tools/profiles/*.json"):
   for line in fileinput.input(filename, inplace=True):
-    print line.replace("\"-std=gnu++98\"","\"-std=c++11\", \"-fpermissive\"")'
+    print (line.replace("\"-std=gnu++98\"","\"-std=c++11\", \"-fpermissive\""))'
 ```
 
 ```
+$ pwd
 /Users/miclub01/GIT/tensorflow/tensorflow/lite/micro/tools/make/gen/mbed_cortex-m4/prj
-(mbed) (base) [prj](master)$ ls ./hello_world/mbed/tensorflow/lite/micro/examples/hello_world/
+$ ls ./hello_world/mbed/tensorflow/lite/micro/examples/hello_world/
 constants.h        main.cc            main_functions.h   sine_model_data.cc
 disco_f746ng       main_functions.cc  output_handler.h   sine_model_data.h
+
+$ ls tensorflow/lite/micro/examples/hello_world/disco_f746ng/
+constants.cc      output_handler.cc
 ```
 ### Example:
 <https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world>
@@ -53,14 +57,12 @@ tensorflow//lite/micro/examples/hello_world/main.cc
 tensorflow//lite/micro/examples/hello_world/main_functions.h
 tensorflow//lite/micro/examples/hello_world/main_functions.cc
 
-ls
-BSP_DISCO_F746NG     LCD_DISCO_F746NG     README_MBED.md       mbed-os.lib          run.sh
-BSP_DISCO_F746NG.lib LCD_DISCO_F746NG.lib __pycache__          mbed_app.json        tensorflow
-BUILD                LICENSE              mbed-os              mbed_settings.py     third_party
 
+mbed dm init -d "arm.com" --model-name "mbed" -q --force
+mbed compile -m NUCLEO_H743ZI2 -t GCC_ARM  -DRESET_STORAGE
+cp ./BUILD/NUCLEO_H743ZI2/GCC_ARM/tflite.bin /Volumes/NOD_H743ZI2/
 
-mbed compile -m NUCLEO_H743ZI2 -t GCC_ARM
-mbed compile -m DISCO_F746NG -t GCC_ARM 
+# mbed compile -m DISCO_F746NG -t GCC_ARM 
 ```
 
 ## CMSIS
